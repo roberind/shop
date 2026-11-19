@@ -117,6 +117,7 @@ async function posApi(op, request, env, B) {
       st.prods.push(p); created++;
     } else updated++;
     p.pos = it.id;
+    { const nn = String(it.name).trim().slice(0, 200); if (nn && p.n !== nn) p.n = nn; } // el nombre lo manda PuntoPOS
     const pc = String(it.cat || "").trim().slice(0, 80);
     if (pc) { const hit = cats.find((c) => normName(c) === normName(pc)); if (!hit) cats.push(pc); p.c = hit || pc; }
     const base = num(it.price);
